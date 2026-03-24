@@ -12,14 +12,17 @@ import WebDashboard from './pages/web/WebDashboard';
 import WebCasos from './pages/web/WebCasos';
 import WebKPIs from './pages/web/WebKPIs';
 import WebAdmin from './pages/web/WebAdmin';
+import WebWhatsApp from './pages/web/WebWhatsApp';
 import OperadorLayout from './pages/operador/OperadorLayout';
 import OperadorDashboard from './pages/operador/OperadorDashboard';
 import OperadorIncidentes from './pages/operador/OperadorIncidentes';
 import OperadorMapa from './pages/operador/OperadorMapa';
 import OperadorPerfil from './pages/operador/OperadorPerfil';
+import ComponentShowcase from './pages/docs/ComponentShowcase';
 
 export const router = createBrowserRouter([
   { path: '/', Component: Login },
+  { path: '/docs/components', Component: ComponentShowcase },
   {
     path: '/pwa',
     Component: PWALayout,
@@ -39,6 +42,7 @@ export const router = createBrowserRouter([
       { index: true, Component: WebDashboard },
       { path: 'casos', Component: WebCasos },
       { path: 'kpis', Component: WebKPIs },
+      { path: 'whatsapp', Component: WebWhatsApp },
       { path: 'admin', Component: WebAdmin },
     ],
   },

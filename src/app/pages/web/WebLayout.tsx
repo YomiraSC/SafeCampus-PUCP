@@ -3,13 +3,14 @@ import { useState } from 'react';
 import {
   LayoutDashboard, FileText, BarChart3, Settings,
   Bell, Shield, LogOut, ChevronLeft, ChevronRight,
-  AlertTriangle, User, Menu, X
+  AlertTriangle, User, Menu, X, MessageCircle
 } from 'lucide-react';
 
 const navItems = [
   { to: '/web', icon: LayoutDashboard, label: 'Dashboard', end: true },
   { to: '/web/casos', icon: FileText, label: 'Gestión de Casos' },
   { to: '/web/kpis', icon: BarChart3, label: 'KPIs y Reportes' },
+  { to: '/web/whatsapp', icon: MessageCircle, label: 'WhatsApp' },
   { to: '/web/admin', icon: Settings, label: 'Admin Sistema' },
 ];
 

@@ -314,6 +314,145 @@ export const incidentsByZone = [
 ];
 
 // ─────────────────────────────────────
+// WHATSAPP CONVERSATIONS
+// ─────────────────────────────────────
+export type ChatPriority = 'alta' | 'media' | 'baja';
+export type ChatStatus = 'bot' | 'humano' | 'esperando' | 'cerrado';
+
+export interface WhatsAppMessage {
+  id: string;
+  from: 'user' | 'bot' | 'agent';
+  text: string;
+  time: string;
+}
+
+export interface WhatsAppChat {
+  id: string;
+  phone: string;
+  contactName: string;
+  lastMessage: string;
+  lastMessageTime: string;
+  unread: number;
+  status: ChatStatus;
+  priority: ChatPriority;
+  assignedTo?: string;
+  incidentId?: string;
+  messages: WhatsAppMessage[];
+}
+
+export const whatsappChats: WhatsAppChat[] = [
+  {
+    id: 'WA-001',
+    phone: '+51 987 654 321',
+    contactName: 'María García López',
+    lastMessage: '¡Ayuda! Acabo de ver a alguien sospechoso',
+    lastMessageTime: '09:42',
+    unread: 3,
+    status: 'esperando',
+    priority: 'alta',
+    incidentId: 'INC-2026-0342',
+    messages: [
+      { id: 'm1', from: 'user', text: 'Hola, necesito reportar una situación', time: '09:35' },
+      { id: 'm2', from: 'bot', text: '¡Hola! Soy el asistente de SafeCampus PUCP. ¿Qué tipo de incidente deseas reportar?\n\n1️⃣ Robo o hurto\n2️⃣ Emergencia médica\n3️⃣ Persona sospechosa\n4️⃣ Otro', time: '09:35' },
+      { id: 'm3', from: 'user', text: '3', time: '09:36' },
+      { id: 'm4', from: 'bot', text: '¿Puedes describir la situación y tu ubicación actual?', time: '09:36' },
+      { id: 'm5', from: 'user', text: 'Hay alguien rondando el estacionamiento, parece que está revisando los autos', time: '09:38' },
+      { id: 'm6', from: 'bot', text: 'Entendido. He registrado tu reporte. Un operador revisará tu caso pronto. Tu ID de incidente es INC-2026-0342.', time: '09:38' },
+      { id: 'm7', from: 'user', text: '¡Ayuda! Acabo de ver a alguien sospechoso cerca de mi auto', time: '09:42' },
+    ],
+  },
+  {
+    id: 'WA-002',
+    phone: '+51 912 345 678',
+    contactName: 'Carlos Mendoza Ríos',
+    lastMessage: 'Sí, la ambulancia ya llegó. Gracias por la ayuda rápida.',
+    lastMessageTime: '09:10',
+    unread: 0,
+    status: 'humano',
+    priority: 'alta',
+    assignedTo: 'Rosa Quispe Mamani',
+    incidentId: 'INC-2026-0341',
+    messages: [
+      { id: 'm1', from: 'user', text: 'EMERGENCIA - Alguien se desmayó en el Patio de Letras', time: '08:48' },
+      { id: 'm2', from: 'bot', text: '⚠️ Emergencia detectada. Estoy transfiriendo tu conversación a un operador de seguridad inmediatamente.', time: '08:48' },
+      { id: 'm3', from: 'agent', text: 'Soy Rosa del equipo de seguridad. ¿La persona está consciente? ¿Respira?', time: '08:50' },
+      { id: 'm4', from: 'user', text: 'Sí respira pero no responde. Es una chica como de 20 años', time: '08:51' },
+      { id: 'm5', from: 'agent', text: 'Estoy enviando al equipo médico. Por favor no la muevas. ¿Puedes quedarte con ella?', time: '08:52' },
+      { id: 'm6', from: 'user', text: 'Sí, aquí estoy', time: '08:53' },
+      { id: 'm7', from: 'agent', text: 'El equipo médico está en camino, llegarán en 2 minutos. ¿Ha recuperado la consciencia?', time: '08:55' },
+      { id: 'm8', from: 'user', text: 'Sí, la ambulancia ya llegó. Gracias por la ayuda rápida.', time: '09:10' },
+    ],
+  },
+  {
+    id: 'WA-003',
+    phone: '+51 945 678 123',
+    contactName: 'Prof. Roberto Silva',
+    lastMessage: 'Gracias, estaré atento.',
+    lastMessageTime: '09:50',
+    unread: 0,
+    status: 'bot',
+    priority: 'media',
+    messages: [
+      { id: 'm1', from: 'user', text: 'Buenas, quiero consultar sobre un objeto que encontré', time: '09:45' },
+      { id: 'm2', from: 'bot', text: '¡Hola Prof. Silva! ¿Deseas reportar un objeto encontrado? Puedo ayudarte con eso.', time: '09:45' },
+      { id: 'm3', from: 'user', text: 'Sí, encontré una mochila azul en el Pabellón A', time: '09:46' },
+      { id: 'm4', from: 'bot', text: 'He registrado el objeto encontrado: Mochila azul - Pabellón A. Se publicará en Lost & Found. ¿Deseas agregar más detalles o una foto?', time: '09:47' },
+      { id: 'm5', from: 'user', text: 'No, solo eso. La dejé en recepción.', time: '09:48' },
+      { id: 'm6', from: 'bot', text: 'Perfecto. El objeto ha sido registrado con ID LF-003. Si alguien reclama la mochila, te notificaremos. ¡Gracias por reportar!', time: '09:48' },
+      { id: 'm7', from: 'user', text: 'Gracias, estaré atento.', time: '09:50' },
+    ],
+  },
+  {
+    id: 'WA-004',
+    phone: '+51 976 543 210',
+    contactName: 'Elena Paredes Núñez',
+    lastMessage: '¿Ya pudieron revisar lo del baño?',
+    lastMessageTime: '08:30',
+    unread: 1,
+    status: 'esperando',
+    priority: 'baja',
+    incidentId: 'INC-2026-0339',
+    messages: [
+      { id: 'm1', from: 'user', text: 'Quiero reportar vandalismo en el Pabellón H', time: '07:15' },
+      { id: 'm2', from: 'bot', text: 'Lamento escuchar eso. ¿Puedes describir los daños y la ubicación exacta?', time: '07:15' },
+      { id: 'm3', from: 'user', text: 'Baños del tercer piso, las puertas están dañadas y hay grafitis', time: '07:16' },
+      { id: 'm4', from: 'bot', text: 'Tu reporte fue registrado con ID INC-2026-0339. Se asignará a un operador. ¿Deseas agregar fotos?', time: '07:17' },
+      { id: 'm5', from: 'user', text: '¿Ya pudieron revisar lo del baño?', time: '08:30' },
+    ],
+  },
+  {
+    id: 'WA-005',
+    phone: '+51 999 888 777',
+    contactName: 'Lucía Ramírez Soto',
+    lastMessage: 'Ok perfecto!',
+    lastMessageTime: 'ayer',
+    unread: 0,
+    status: 'cerrado',
+    priority: 'baja',
+    messages: [
+      { id: 'm1', from: 'user', text: 'Hola, ¿cómo puedo activar el acompañamiento seguro?', time: '16:20' },
+      { id: 'm2', from: 'bot', text: '¡Hola Lucía! Para solicitar acompañamiento seguro puedes usar la opción "Acompañamiento" en la app SafeCampus, o indicarme aquí tu ubicación de origen y destino.', time: '16:20' },
+      { id: 'm3', from: 'user', text: 'Estoy en la Biblioteca Central y necesito ir al estacionamiento', time: '16:21' },
+      { id: 'm4', from: 'bot', text: 'He solicitado un acompañamiento desde Biblioteca Central al Estacionamiento. Un agente de seguridad estará contigo en ~5 minutos. Recibirás una confirmación.', time: '16:22' },
+      { id: 'm5', from: 'user', text: 'Ok perfecto!', time: '16:22' },
+    ],
+  },
+  {
+    id: 'WA-006',
+    phone: '+51 911 222 333',
+    contactName: 'Número desconocido',
+    lastMessage: 'hola',
+    lastMessageTime: '09:55',
+    unread: 1,
+    status: 'bot',
+    priority: 'media',
+    messages: [
+      { id: 'm1', from: 'user', text: 'hola', time: '09:55' },
+    ],
+  },
+];
+
+// ─────────────────────────────────────
 // SYSTEM INTEGRATIONS
 // ─────────────────────────────────────
 export const integrations = [
